@@ -1,17 +1,64 @@
-name: Test Application
+# name: Test Application
+
+# on:
+#   push:
+#     branches:
+#       - development
+
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+
+#       - name: Test
+#         run: echo "Hello from GitHub Actions!"
+
+name: Number Guessing App CI
 
 on:
   push:
     branches:
       - development
+      - staging
+      - production
+
+  pull_request:
+    branches:
+      - development
+      - staging
+      - production
 
 jobs:
   test:
+    name: Test Number Guessing App
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Test
-        run: echo "Hello from GitHub Actions!"
+      - name: Check Project Files
+        run: |
+          echo "Checking Number Guessing App..."
+          ls -la
+
+      - name: Check HTML File
+        run: |
+          test -f index.html
+          echo "index.html exists"
+
+      - name: Check CSS File
+        run: |
+          test -f style.css
+          echo "style.css exists"
+
+      - name: Check JavaScript File
+        run: |
+          test -f script.js
+          echo "script.js exists"
+
+      - name: Workflow Completed
+        run: echo "Number Guessing App checks completed successfully!"
